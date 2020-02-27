@@ -6,6 +6,8 @@
 package gr.forth.isl.normalizationmagic;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,23 +59,15 @@ public class Actions {
                     if (allofmeCont.toLowerCase().equals("remove") || allofmeCont.toLowerCase().equals("delete")) {
                         elementValue = allofme[counter];
                         values.add(elementValue);
-                        //System.out.println("Value" + counter);
                     }
 
                     if (allofmeCont.toLowerCase().equals("from")) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
-                        // System.out.println("Name" + elementName);
                     }
-
                 }
-
                 testmap.put(elementName, values);
-
             }
-
         }
-        //  System.out.println(testmap.entrySet().toString());
-
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
             XMLEventWriter out = ofactory.createXMLEventWriter(result);
@@ -84,13 +78,11 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                //      System.out.println("EVENT"+ e.toString());
                 if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
 
                     String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
-                    //   System.out.println("TO BRHKA"+ef2.toString());
 
                     Iterator it = testmap.get(tocheck).iterator();
 
@@ -99,8 +91,7 @@ public class Actions {
 
                         if (ef2.isCharacters() && ((Characters) ef2).getData().contains(toreplace)) {
 
-                            ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(toreplace, ""));
-                            //   
+                            ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(toreplace, "").trim());  
                         }
 
                     }
@@ -147,7 +138,6 @@ public class Actions {
                     if (allofmeCont.toLowerCase().equals("from")) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
                         s.add(elementName);
-                        // System.out.println("Name" + elementName);
                     }
 
                 }
@@ -168,7 +158,6 @@ public class Actions {
             while (i2.hasNext()) {
 
                 String manme = i2.next().toString();
-                // System.out.println(manme);
                 String elementValue = null;
 
                 if ((manme.toLowerCase().contains("remove") || manme.toLowerCase().contains("delete")) && !(manme.toLowerCase().contains("between")) && (manme.contains(edw))) {
@@ -180,15 +169,11 @@ public class Actions {
 
                         if (allofmeCont.toLowerCase().equals("remove") || allofmeCont.equals("delete")) {
                             elementValue = allofme[counter];
-                            //System.out.println("Value" + elementValue1);
                         }
 
                         if (allofmeCont.equals("from")) {
                             elementName = allofme[counter].replace("<", "").replace(">", "");
-
-                            //System.out.println("Name" + elementName);
                         }
-
                     }
 
                     values.add(elementValue);
@@ -199,9 +184,6 @@ public class Actions {
 
             testmap.put(elementName, values);
         }
-
-        System.out.println(testmap.entrySet().toString());
-
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
             XMLEventWriter out = ofactory.createXMLEventWriter(result);
@@ -212,13 +194,11 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                //      System.out.println("EVENT"+ e.toString());
                 if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
 
                     String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
-                    //   System.out.println("TO BRHKA"+ef2.toString());
 
                     Iterator it = testmap.get(tocheck).iterator();
 
@@ -228,7 +208,6 @@ public class Actions {
                         if (ef2.isCharacters() && ((Characters) ef2).getData().contains(toreplace)) {
 
                             ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(toreplace, ""));
-                            //   
                         }
 
                     }
@@ -273,22 +252,15 @@ public class Actions {
                     if (allofmeCont.equals("ADD")) {
                         elementValue = allofme[counter];
                         values.add(elementValue);
-                        //System.out.println("Value" + counter);
                     }
 
                     if (allofmeCont.toLowerCase().equals("from")) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
-                        // System.out.println("Name" + elementName);
                     }
-
                 }
-
                 testmap.put(elementName, values);
-
             }
-
         }
-        //  System.out.println(testmap.entrySet().toString());
 
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
@@ -300,13 +272,12 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                //      System.out.println("EVENT"+ e.toString());
                 if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
 
                     String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
-                    //   System.out.println("TO BRHKA"+ef2.toString());
+
 
                     Iterator it = testmap.get(tocheck).iterator();
 
@@ -314,7 +285,7 @@ public class Actions {
                         String toreplace = it.next().toString().replace("_", " ");
 
                         if (ef2.isCharacters()) {
-                            System.out.println("" + toreplace);
+
                             ef2 = ef.createCharacters(toreplace + ef2.asCharacters().getData());
                         }
 
@@ -340,11 +311,11 @@ public class Actions {
 
         Map<String, List<String>> testmap = new HashMap();
 
-        //  ArrayList<String> values = new ArrayList(); 
+
         Iterator i = inputs.iterator();
         String elementName = null;
 
-        //  String elementValue = null;
+        
         Set s = new TreeSet();
         while (i.hasNext()) {
 
@@ -361,10 +332,7 @@ public class Actions {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
                         s.add(elementName);
                     }
-
                 }
-
-                //    testmap.put(elementName, values);
             }
 
         }
@@ -381,7 +349,7 @@ public class Actions {
             while (i2.hasNext()) {
 
                 String manme = i2.next().toString();
-                // System.out.println(manme);
+                
                 String elementValue = null;
 
                 if ((manme.contains("ADD")) && (manme.contains(edw))) {
@@ -393,13 +361,13 @@ public class Actions {
 
                         if (allofmeCont.equals("ADD")) {
                             elementValue = allofme[counter];
-                            System.out.println("Value" + elementValue);
+                            
                         }
 
                         if (allofmeCont.equals("from")) {
                             elementName = allofme[counter].replace("<", "").replace(">", "");
 
-                            System.out.println("Name" + elementName);
+                            
                         }
 
                     }
@@ -412,7 +380,6 @@ public class Actions {
 
             testmap.put(elementName, values);
         }
-        System.out.println(testmap.entrySet().toString());
 
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
@@ -424,13 +391,13 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                //      System.out.println("EVENT"+ e.toString());
+                
                 if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
 
                     String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
-                    //   System.out.println("TO BRHKA"+ef2.toString());
+
 
                     Iterator it = testmap.get(tocheck).iterator();
 
@@ -438,7 +405,6 @@ public class Actions {
                         String toreplace = it.next().toString().replace("_", " ");
 
                         if (ef2.isCharacters()) {
-//System.out.println(""+toreplace);
                             ef2 = ef.createCharacters(toreplace + ef2.asCharacters().getData());
                         }
 
@@ -518,7 +484,7 @@ public class Actions {
 //
 //        testmap.put(elementName1, elementValue1);
 //        testmap.put(elementName2, elementValue2);
-        System.out.println(testmap.entrySet().toString());
+       
 
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
@@ -542,8 +508,7 @@ public class Actions {
                         Pair tor = (Pair) it.next();
                         String toreplace = tor.getKey().toString().replace("_", " ");
                         String newvalue = tor.getValue().toString().replace("_", " ");
-//                       System.out.println("    1  "+toreplace);
-//                         System.out.println("   2  "+newvalue);
+
                         if (ef2.isCharacters() && ((Characters) ef2).getData().contains(toreplace)) {
                             ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(toreplace, newvalue));
                             //         System.out.println("    1  "+ef2.asCharacters().getData().replace(toreplace,newvalue)); 
@@ -656,8 +621,7 @@ public class Actions {
 //        String elementValue2 = "()";
 //
 //        testmap.put(elementName1, elementValue1);
-//        testmap.put(elementName2, elementValue2);
-        System.out.println(testmap.entrySet().toString());
+
 
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
@@ -681,11 +645,10 @@ public class Actions {
                         Pair tor = (Pair) it.next();
                         String toreplace = tor.getKey().toString().replace("_", " ");
                         String newvalue = tor.getValue().toString().replace("_", " ");
-//                       System.out.println("    1  "+toreplace);
-//                         System.out.println("   2  "+newvalue);
+
                         if (ef2.isCharacters() && ((Characters) ef2).getData().contains(toreplace)) {
                             ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(toreplace, newvalue));
-                            //         System.out.println("    1  "+ef2.asCharacters().getData().replace(toreplace,newvalue)); 
+                            
                         }
 
                     }
@@ -724,7 +687,7 @@ public class Actions {
 
             String manme = i.next().toString();
 
-            if (manme.contains("remove") && manme.contains("between")) {
+            if (manme.toLowerCase().contains("remove") && manme.toLowerCase().contains("between")) {
                 String[] allofme = manme.split(" ");
                 int counter = 0;
 
@@ -782,7 +745,7 @@ public class Actions {
                         if (allofmeCont.equals("between")) {
                             elementValue1 = allofme[counter];
                             elementValue2 = allofme[counter + 1];
-                            System.out.println("Value" + elementValue1 + " " + elementValue2);
+                            
                         }
 
                         if (allofmeCont.equals("from")) {
@@ -790,19 +753,14 @@ public class Actions {
                             // s.add(elementName);
                             //System.out.println("Name" + elementName);
                         }
-
                     }
-
                     values.add(new Pair(elementValue1, elementValue2));
-
                 }
-
             }
-
             testmap.put(elementName, values);
         }
 
-        System.out.println(testmap.entrySet().toString());
+        
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
             XMLEventWriter out = ofactory.createXMLEventWriter(result);
@@ -830,9 +788,8 @@ public class Actions {
                             String substringme = null;
 
                             substringme = ef2.asCharacters().getData().substring(ef2.asCharacters().getData().indexOf(firststring), ef2.asCharacters().getData().indexOf(secondstring) + secondstring.length());
-
-                            ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(" " + substringme, ""));
-                            ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(substringme, ""));
+                            ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(" " + substringme, "").trim());
+                            ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(substringme, "").trim());
                         }
                     }
                     out.add(e);
@@ -882,12 +839,10 @@ public class Actions {
                     if (allofmeCont.equals("between")) {
                         elementValue1 = allofme[counter];
                         elementValue2 = allofme[counter + 1];
-                        System.out.println("Value" + elementValue1 + " " + elementValue2);
                     }
 
                     if (allofmeCont.equals("from")) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
-                        System.out.println("Name" + elementName);
                     }
 
                 }
@@ -895,7 +850,6 @@ public class Actions {
 
             }
             testmap.put(elementName, values);
-            System.out.println(" " + testmap);
 
 //            if(manme.contains("Remove") || manme.contains("Delete") )
 //           {
@@ -958,8 +912,7 @@ public class Actions {
 
     }
 
-    public static void dissect(String elementName, String delimeter, List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
-
+    public static void dissect(String elementName, String delimeter, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 //        StreamSource source = new StreamSource("contexts.xml");
 //        StreamResult result = new StreamResult("connection2.xml");     
 //        
@@ -1031,8 +984,11 @@ public class Actions {
 
                   //  String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
                     XMLEvent ef2 = (XMLEvent) in.next();
-
-                    if(ef2.isCharacters()){
+                    if(ef2.isEndElement()){
+                        out.add(e);
+                        out.add(ef2);
+                        continue;
+                    }else if(ef2.isCharacters()){
                     
                     String[] texts = ((Characters) ef2).getData().replace(" ", "").split(delimeter);
 
@@ -1060,7 +1016,6 @@ public class Actions {
 //                    out.add(ef2);
                         count++;
                     } }
-                    //else out.add(e);
 
                 } else {
                     out.add(e);

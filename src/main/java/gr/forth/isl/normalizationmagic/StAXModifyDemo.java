@@ -6,14 +6,23 @@
 package gr.forth.isl.normalizationmagic;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javafx.util.Pair;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
@@ -34,26 +43,100 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class StAXModifyDemo {
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
 
         XMLInputFactory ifactory = XMLInputFactory.newFactory();
         XMLOutputFactory ofactory = XMLOutputFactory.newFactory();
-        StreamSource source = new StreamSource("normalized_contexts-17.xml");
-        StreamResult result = new StreamResult("normalized_contexts-18.xml");
+        StreamSource source=new StreamSource(new InputStreamReader(new FileInputStream("input.xml"),"UTF-8"));
+        StreamResult result=new StreamResult(new OutputStreamWriter(new FileOutputStream("output.xml", false),"UTF-8"));
 
-        List<String> inputs = new ArrayList();
+        StreamSource intermediateInput=null;
 
-        BufferedReader reader = new BufferedReader(new FileReader("tellMeWhatYouWantWhatYouReallyReallyWant.txt"));
+        List<String> replaceInputs = new ArrayList();
+        List<String> removeInputs = new ArrayList();
+        List<String> removeBetweenInputs = new ArrayList();
+        List<String> dissectInputs = new ArrayList();
+
+        BufferedReader reader = new BufferedReader(new FileReader("rules.txt"));
 
         String line = reader.readLine();
         while (line != null) {
-            inputs.add(line);
+            if(line.toLowerCase().startsWith("replace")){
+                replaceInputs.add(line);
+            }else if(line.toLowerCase().startsWith("remove") || line.toLowerCase().startsWith("delete")){
+                if(line.toLowerCase().contains(" between ")){
+                    removeBetweenInputs.add(line);
+                }else{
+                    removeInputs.add(line);
+                }
+                
+            }else if(line.toLowerCase().startsWith("dissect") || line.toLowerCase().startsWith("split")){
+                dissectInputs.add(line);
+            }else{
+                //to log warning here
+            }
             line = reader.readLine();
         }
-      //  System.out.println(inputs);
         reader.close();
+        int i=0;
+        for(String replaceInput : replaceInputs){
+            System.out.println("Applying REPLACE rule : "+replaceInput);
+            result=new StreamResult(new OutputStreamWriter(new FileOutputStream("output.xml", false),"UTF-8"));
+            if(intermediateInput==null){
+                Actions.replace(Arrays.asList(replaceInput), source, result, ifactory, ofactory);
+            }else{
+                Actions.replace(Arrays.asList(replaceInput), intermediateInput, result, ifactory, ofactory);
+            }
+            ifactory= XMLInputFactory.newFactory();
+            ofactory = XMLOutputFactory.newFactory();
+            Files.copy(Paths.get("output.xml"), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
+            intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));           
+        }
 
-   
+        for(String removeInput : removeBetweenInputs){
+            System.out.println("Applying REMOVE BETWEEN rule : "+removeInput);
+            result=new StreamResult(new OutputStreamWriter(new FileOutputStream("output.xml", false),"UTF-8"));
+            if(intermediateInput==null){
+                Actions.remove_between(Arrays.asList(removeInput), source, result, ifactory, ofactory);
+            }else{
+                Actions.remove_between(Arrays.asList(removeInput), intermediateInput, result, ifactory, ofactory);
+            }
+            ifactory= XMLInputFactory.newFactory();
+            ofactory = XMLOutputFactory.newFactory();
+            Files.copy(Paths.get("output.xml"), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
+            intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));
+        }
+
+        for(String removeInput : removeInputs){
+            System.out.println("Applying REMOVE rule : "+removeInput);
+            result=new StreamResult(new OutputStreamWriter(new FileOutputStream("output.xml", false),"UTF-8"));
+            if(intermediateInput==null){
+                Actions.remove(Arrays.asList(removeInput), source, result, ifactory, ofactory);
+            }else{
+                Actions.remove(Arrays.asList(removeInput), intermediateInput, result, ifactory, ofactory);
+            }
+            ifactory= XMLInputFactory.newFactory();
+            ofactory = XMLOutputFactory.newFactory();
+            Files.copy(Paths.get("output.xml"), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
+            intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));
+        }
+
+        for(String dissectLine : dissectInputs){
+            System.out.println("Applying DISSECT rule : "+dissectLine);
+            result=new StreamResult(new OutputStreamWriter(new FileOutputStream("output.xml", false),"UTF-8"));
+            Pair<String,String> dissectPair=Utils.getDissectionInfo(dissectLine.trim());
+            if(intermediateInput==null){
+                Actions.dissect(dissectPair.getKey(), dissectPair.getValue(), source, result, ifactory, ofactory);
+            }else{
+                Actions.dissect(dissectPair.getKey(), dissectPair.getValue(), intermediateInput, result, ifactory, ofactory);
+            }
+            ifactory= XMLInputFactory.newFactory();
+            ofactory = XMLOutputFactory.newFactory();
+            Files.copy(Paths.get("output.xml"), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
+            intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));   
+        }
+//        Files.delete(Paths.get("input_intermediate.xml"));
+        
       //  Map<String, String> testmap = new HashMap();
 //
 //        Iterator i = inputs.iterator();
@@ -112,7 +195,7 @@ public class StAXModifyDemo {
         
    //  Actions.remove_between(inputs,source,result,ifactory,ofactory);
      
-          Actions.dissect("contexts_notebook",",",inputs,source,result,ifactory,ofactory);
+//          Actions.dissect("contexts_notebook",",",inputs,source,result,ifactory,ofactory);
           
 // preserves the blanks 
           //Actions.dissect2("consequences",",",inputs,source,result,ifactory,ofactory);
