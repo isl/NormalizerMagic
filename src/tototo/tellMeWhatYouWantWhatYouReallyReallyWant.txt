@@ -1,0 +1,4 @@
+Replace Mound ? with Mound_ß from objects_ees_findspot
+Replace Mound ï¿½, mount B with Mound_ß from objects_ees_findspot
+Replace same_in_(sand) with Mound_ß from objects_ees_findspot
+Replace Mound_? with Mound_ß from objects_ees_findspot

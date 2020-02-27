@@ -1,0 +1,60 @@
+Replace Mound ? with Mound_ß from objects_ees_findspot
+Replace Mound ï¿½, mount B with Mound_ß from objects_ees_findspot
+Replace same_in_(sand) with Mound_ß from objects_ees_findspot
+Replace Mound_? with Mound_ß from objects_ees_findspot
+Replace Mound_?. with Mound_ß from objects_ees_findspot
+Replace East,_wall_street with East_wall_street from objects_ees_findspot
+Replace east_wall_street with East_wall_street from objects_ees_findspot
+Replace leve with level from objects_ees_findspo
+Replace Level with level from objects_ees_findspo
+Replace / with – from objects_ees_findspo
+Replace of with of_the from objects_ees_findspo
+Replace North_west with north-west from objects_ees_findspo
+Replace : with , from objects_ees_findspo
+Replace end_of with end_from objects_ees_findspo
+replace <1%_of_rim(?) with <1%_preserved_(rim) from objects_condition
+replace  <1%_preserved,_handle with 10%_preserved_(handle)  from objects_condition
+replace  same with (base),_(body)_and_(rim),_(entire handle) from objects_condition
+replace  c._10%_rim with 10%_preserved_(rim) from objects_condition
+replace  Handle,_10% with 10%_preserved_(handle) from objects_condition
+replace  neck_10% with 10%_preserved_(neck) from objects_condition
+replace  Preserved __10% with 10%_preserved from objects_condition
+replace  Preserved_in_a_propoortion_of_c._5% with 5%_preserved from objects_condition
+replace  rim_10% with 10%_preserved_(rim) from objects_condition
+replace  Rim_and_body_sherd._50% preserved. with 50 %_preserved_(rim_and_body) from objects_condition
+replace  Rim,_<2%_rim with <2%_preserved_(rim) from objects_condition
+replace  Rim,_c.5%_rim with 5%_preserved_(rim) from objects_condition
+replace <10%_of_vessel,_30%_(of_rim) with <10%_of_vessel,_30%_of_rim_preserved from objects_condition
+replace <5%_rim_change_to_<5%_of_rim_preserved,_same_for_base_etc. from objects_condition
+replace any_,_with_. from objects_condition
+replace Archaeologically_complete_-_100% with 100%_preserved from objects_condition
+replace  Fragment? with fragmentary_if_no_text_follows from objects_condition
+replace  Fragment with fragmentary_if_no_text_follows from objects_condition
+replace  Fragmentary. with fragmentary_if_no_text_follows from objects_condition
+replace fragmentary? with fragmentary_if_no_text_follows from objects_condition
+replace fragmentary with Fragmentary_if_more_text_follows from objects_condition
+replace half_fragment with Half_of_the_fragment_preserved from objects_condition
+replace Half_is_missing with Half_of_the_fragment_preserved from objects_condition
+Remove or from objects_material_comment
+remove ? from objects_objects_comment
+remove (?) from objects_objects_comment
+remove unknown from objects_objects_comment
+remove like from objects_objects_comment
+remove Like from objects_objects_comment
+replace  & with , from objects_objects_comment
+replace  + with , from objects_objects_comment
+replace and with , from objects_objects_comment
+replace  / with , from objects_objects_comment
+replace  or with , from objects_objects_comment
+replace  ? Fragmentary with fragmentary from objects_objects_comment
+replace ? fragments with fragmentary  from objects_objects_comment
+replace  ? fragment with fragmentary from objects_objects_comment
+Replace tbc with (TBC) from objects_objects_comment
+Replace TBC with (TBC) from objects_objects_comment
+Replace –TBC with (TBC) from objects_objects_comment
+Replace TBC with (TBC) from objects_objects_comment
+Replace Subtype_TBC with (subtype_TBC) from objects_objects_comment
+Replace , with . from objects_objects_comment
+Remove ? from objects_objects_comment
+Replace BM with British_Museum from objects_location
+Replace Shadia_jewellery with Khartoum from objects_location

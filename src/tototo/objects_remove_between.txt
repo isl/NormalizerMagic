@@ -1,0 +1,3 @@
+Remove all between ( ) from objects_ees_findspot
+Remove all between [ ] from objects_ees_findspot
+Remove all between { } from objects_ees_findspot

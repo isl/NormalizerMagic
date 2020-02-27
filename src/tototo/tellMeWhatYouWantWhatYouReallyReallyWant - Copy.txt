@@ -1,0 +1,148 @@
+remove = from contexts_equivalent
+remove ~ from contexts_equivalent
+remove ? from contexts_equivalent
+remove (?) from contexts_equivalent
+remove () from contexts_equivalent
+remove years (2012) contexts_equivalent
+remove all between ( ) from contexts_equivalent
+remove n/a from contexts_equivalent
+replace Alluvial with Allumvium from contexts_equivalent
+
+remove = from contexts_cuts
+remove ~ from contexts_cuts
+remove ? from contexts_cuts
+remove (?) from contexts_cuts
+remove () from contexts_cuts
+remove years (2012) contexts_cuts
+remove all between ( ) from contexts_cuts
+remove n/a from contexts_cuts
+replace Alluvial with Allumvium from contexts_cuts
+
+remove = from contexts_cut_by
+remove ~ from contexts_cut_by
+remove ? from contexts_cut_by
+remove (?) from contexts_cut_by
+remove () from contexts_cut_by
+remove years (2012) from contexts_cut_by
+remove all between ( ) from contexts_cut_by
+remove n/a from contexts_cut_by
+replace Alluvial with Allumvium from contexts_cut_by
+
+remove = from contexts_abuts
+remove ~ from contexts_abuts
+remove ? from contexts_abuts
+remove (?) from contexts_abuts
+remove () from contexts_abuts
+remove years (2012) from contexts_abuts
+remove all between ( ) from contexts_abuts
+remove n/a from contexts_abuts
+replace Alluvial with Allumvium from contexts_abuts
+
+remove = from contexts_overlies
+remove ~ from contexts_overlies
+remove ? from contexts_overlies
+remove (?) from contexts_overlies
+remove () from contexts_overlies
+remove years (2012) contexts_overlies
+remove all between ( ) from contexts_overlies
+remove n/a from contexts_overlies
+replace Alluvial with Allumvium from contexts_overlies
+
+remove = from contexts_underlies
+remove ~ from contexts_underlies
+remove ? from contexts_underlies
+remove (?) from contexts_underlies
+remove () from contexts_underlies
+remove years (2012) from contexts_underlies
+remove all between ( ) from contexts_underlies
+remove n/a from contexts_underlies
+replace Alluvial with Allumvium from contexts_underlies
+
+remove = from contexts_abutted_by
+remove ~ from contexts_abutted_by
+remove ? from contexts_abutted_by
+remove (?) from contexts_abutted_by
+remove () from contexts_abutted_by
+remove years (2012) from contexts_abutted_by
+remove all between ( ) from contexts_abutted_by
+remove n/a from contexts_abutted_by
+replace Alluvial with Allumvium from contexts_abutted_by
+
+Remove . from contexts_building
+Remove , from contexts_building
+
+Replace / with , from contexts_room
+
+Remove all between ( ) from contexts_final_drawing
+Replace / with , from contexts_final_drawing
+Remove - from contexts_final_drawing
+
+Remove all between ( ) from contexts_sketch
+Replace / with , from contexts_sketch
+Remove - from contexts_sketch
+
+Remove all between ( ) from contexts_other_plan
+Replace / with , from contexts_other_plan
+Remove - from contexts_other_plan
+
+Remove . from contexts_excavators
+Replace + with , from contexts_excavators
+Replace ; with , from contexts_excavators
+Replace / with , from contexts_excavators
+Replace & with , from contexts_excavators
+Replace and with , from contexts_excavators
+Replace B.C with BC from contexts_excavators
+Replace M.S with MS from contexts_excavators
+Replace Shadia with ShA from contexts_excavators
+Replace SA with ShA from contexts_excavators
+Replace Hilary with HS from contexts_excavators
+Replace M.B with MB from contexts_excavators
+
+Replace SK with Sk from contexts_skeletal
+Replace / with - from contexts_skeletal
+
+Remove < from contexts_botany
+Remove > from contexts_botany
+
+Remove all between [ ] from contexts_sketch
+
+
+Remove all between ( ) from contexts_other_plan
+Remove all between [ ] from contexts_other_plan
+Replace d with D from contexts_other_plan
+Replace a with A from contexts_other_plan
+Remove / from contexts_other_plan
+Remove all between ( ) from contexts_other_plan
+Replace D448 with D4448 from contexts_other_plan
+
+Remove all between ( ) from contexts_other_section
+Remove all between [ ] from contexts_other_section
+Replace d with D from contexts_other_section
+Replace a with A from contexts_other_section
+Remove / from contexts_other_section
+Remove all between ( ) from contexts_other_section
+Replace D448 with D4448 from contexts_other_section
+
+Remove field from contexts_phase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
