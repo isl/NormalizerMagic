@@ -6,6 +6,7 @@
 package gr.forth.isl.normalizationmagic;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,6 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -20,16 +22,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.util.Pair;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import org.apache.log4j.Logger;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
  * @author minadakn
  * @author Yannis Marketakis (marketak 'at' ics 'dot' forth 'dot' gr)
  */
 public class StAXModifyDemo {
+    private static final Logger logger=Logger.getLogger(StAXModifyDemo.class);
 
     public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
 
@@ -123,114 +137,28 @@ public class StAXModifyDemo {
             Files.copy(Paths.get("output.xml"), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
             intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));   
         }
-//        Files.delete(Paths.get("input_intermediate.xml"));
         
-      //  Map<String, String> testmap = new HashMap();
-//
-//        Iterator i = inputs.iterator();
-//
-//        String elementName = null;
-//        String elementValue = null;
-//
-//        while (i.hasNext()) {
-//
-//            String manme = i.next().toString();
-//
-//            if (manme.contains("remove") || manme.contains("delete")) {
-//                String[] allofme = manme.split(" ");
-//                int counter = 0;
-//
-//                for (String allofmeCont : allofme) {
-//                    counter++;
-//                    if (allofmeCont.equals("remove") || allofmeCont.equals("delete")) {
-//                        elementValue = allofme[counter];
-//                        System.out.println("Value" + elementValue);
-//                    }
-//
-//                    if (allofmeCont.equals("from")) {
-//                        elementName = allofme[counter].replace("<", "").replace(">", "");
-//                        System.out.println("Name" + elementName);
-//                    }
-//
-//                }
-//
-//                testmap.put(elementName, elementValue);
-//
-//            }
-//
-////            if(manme.contains("Remove") || manme.contains("Delete") )
-////           {
-////               String[] allofme = manme.split(" ");
-////               
-////               //     System.out.println(allofme[counter]);
-////           }
-     //   }       
-//
-//        String elementName2 = "t2";
-//        String elementValue2 = "()";
-//
-//        testmap.put(elementName1, elementValue1);
-//        testmap.put(elementName2, elementValue2);
-       
-  //      System.out.println(testmap.entrySet().toString());
-        
-     //  Actions.add2(inputs,source,result,ifactory,ofactory);
-// Actions.remove2(inputs,source,result,ifactory,ofactory);
-//         
- 
-//Actions.remove2(inputs,source,result,ifactory,ofactory);
-//Actions.replace2(inputs,source,result,ifactory,ofactory);
-        
-   //  Actions.remove_between(inputs,source,result,ifactory,ofactory);
-     
-//          Actions.dissect("contexts_notebook",",",inputs,source,result,ifactory,ofactory);
-          
-// preserves the blanks 
-          //Actions.dissect2("consequences",",",inputs,source,result,ifactory,ofactory);
-     // Actions.add2(inputs,source,result,ifactory,ofactory);
-//        
-        
-        
-        
-        
-        
-        
-        
-
-//        try {
-//            XMLEventReader in = ifactory.createXMLEventReader(source);
-//            XMLEventWriter out = ofactory.createXMLEventWriter(result);
-//
-//            XMLEventFactory ef = XMLEventFactory.newInstance();
-//
-//            while (in.hasNext()) {
-//
-//                XMLEvent e = in.nextEvent();
-//
-//                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
-//
-//                    String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
-//
-//                    XMLEvent ef2 = (XMLEvent) in.next();
-//
-//                    if (ef2.isCharacters() && ((Characters) ef2).getData().contains(testmap.get(tocheck))) {
-//
-//                        ef2 = ef.createCharacters(ef2.asCharacters().getData().replace(testmap.get(tocheck), ""));
-//                        out.add(e);
-//                        out.add(ef2);
-//                    } else {
-//                        out.add(e);
-//                        out.add(ef2);
-//                    }
-//
-//                } else {
-//                    out.add(e);
-//                }
-//            }
-//            in.close();
-//            out.close();
-//        } catch (XMLStreamException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            result.getWriter().flush();
+            result.getWriter().close();
+            intermediateInput.getReader().close();
+            beautifyOutputResult(result);
+            Files.delete(Paths.get("input_intermediate.xml"));
+        }catch(IOException | ParserConfigurationException | SAXException | TransformerException ex){
+            ex.printStackTrace();
         }
+        
+    }
+    
+    private static void beautifyOutputResult(StreamResult resulta) throws TransformerConfigurationException, ParserConfigurationException, IOException, SAXException, TransformerException{
+        Document doc=DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(new File("output.xml")), "UTF-8");
+        
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        
+        StreamResult finalResult = new StreamResult(new File("output.xml"));
+        DOMSource source = new DOMSource(doc);
+        transformer.transform(source, finalResult);
+    }
 }
