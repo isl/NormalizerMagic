@@ -990,7 +990,7 @@ public class Actions {
                         continue;
                     }else if(ef2.isCharacters()){
                     
-                    String[] texts = ((Characters) ef2).getData().replace(" ", "").split(delimeter);
+                    String[] texts = ((Characters) ef2).getData().split(delimeter);
 
                     int count = 0;
                     out.add(e);
@@ -1001,7 +1001,7 @@ public class Actions {
                         // ef2=ef.
                         out.add(ef2);
 
-                        ef2 = ef.createCharacters(texts[count]);
+                        ef2 = ef.createCharacters(texts[count].trim());
                         out.add(ef2);
 
                         ef2 = ef.createEndElement("", "", elementName);
