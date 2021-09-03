@@ -913,110 +913,30 @@ public class Actions {
     }
 
     public static void dissect(String elementName, String delimeter, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
-//        StreamSource source = new StreamSource("contexts.xml");
-//        StreamResult result = new StreamResult("connection2.xml");     
-//        
-//        XMLInputFactory ifactory = XMLInputFactory.newFactory();
-//        XMLOutputFactory ofactory = XMLOutputFactory.newFactory();
-//        String elementName = null;
-//        Pair<String, String> elementValue = new Pair(null, null);
-//
-//        Map<String, List<Pair>> testmap = new HashMap();
-//
-//        ArrayList<Pair> values = new ArrayList();
-//
-//        Iterator i = inputs.iterator();
-//
-//        while (i.hasNext()) {
-//
-//            String manme = i.next().toString();
-//
-//            if (manme.contains("remove") && manme.contains("between")) {
-//                String[] allofme = manme.split(" ");
-//                int counter = 0;
-//                String elementValue1 = null;
-//                String elementValue2 = null;
-//
-//                for (String allofmeCont : allofme) {
-//                    counter++;
-//
-//                    if (allofmeCont.equals("between")) {
-//                        elementValue1 = allofme[counter];
-//                        elementValue2 = allofme[counter + 1];
-//                        System.out.println("Value" + elementValue1 + " " + elementValue2);
-//                    }
-//
-//                    if (allofmeCont.equals("from")) {
-//                        elementName = allofme[counter].replace("<", "").replace(">", "");
-//                        System.out.println("Name" + elementName);
-//                    }
-//
-//                }
-//                values.add(new Pair(elementValue1, elementValue2));
-//
-//            }
-//            testmap.put(elementName, values);
-//            System.out.println(" " + testmap);
-//            if(manme.contains("Remove") || manme.contains("Delete") )
-//           {
-//               String[] allofme = manme.split(" ");
-//               
-//               //     System.out.println(allofme[counter]);
-//           }
-        //     }
-//
-//        String elementName2 = "t2";
-//        String elementValue2 = "()";
-//
-//        testmap.put(elementName1, elementValue1);
-//        testmap.put(elementName2, elementValue2);
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
             XMLEventWriter out = ofactory.createXMLEventWriter(result);
-
             XMLEventFactory ef = XMLEventFactory.newInstance();
-
             while (in.hasNext()) {
-
                 XMLEvent e = in.nextEvent();
-
                 if (e.isStartElement() && (((StartElement) e).getName().getLocalPart().toLowerCase().equals(elementName))) {
-
-                  //  String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
                     XMLEvent ef2 = (XMLEvent) in.next();
                     if(ef2.isEndElement()){
                         out.add(e);
                         out.add(ef2);
                         continue;
                     }else if(ef2.isCharacters()){
-                    
-                    String[] texts = ((Characters) ef2).getData().split(delimeter);
-
-                    int count = 0;
-                    out.add(e);
-                    for (String text : texts) {
-
-                        ef2 = ef.createStartElement("", "", elementName);
-
-                        // ef2=ef.
-                        out.add(ef2);
-
-                        ef2 = ef.createCharacters(texts[count].trim());
-                        out.add(ef2);
-
-                        ef2 = ef.createEndElement("", "", elementName);
-                        out.add(ef2);
-
-//                     ef2= ef.createStartElement("object_broken","","");
-//                    out.add(ef2);
-//                     ef2 = ef.createCharacters("OLE2");
-//
-//                    out.add(ef2);
-//                     ef2= ef.createEndElement("object_broken","","");
-//                    out.add(ef2);
-                        count++;
-                    } }
-
+                        String[] texts = ((Characters) ef2).getData().split(delimeter);
+                        out.add(e);
+                        for (String text : texts) {
+                            ef2 = ef.createStartElement("", "", elementName);
+                            out.add(ef2);
+                            ef2 = ef.createCharacters(text.trim());
+                            out.add(ef2);
+                            ef2 = ef.createEndElement("", "", elementName);
+                            out.add(ef2);
+                        } 
+                    }
                 } else {
                     out.add(e);
                 }
@@ -1026,12 +946,7 @@ public class Actions {
         } catch (XMLStreamException e) {
             e.printStackTrace();
         }
-
     }
-
-    
-    
-    
     
     //added my MaTh
     
