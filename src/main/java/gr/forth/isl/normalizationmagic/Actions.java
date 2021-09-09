@@ -105,6 +105,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void remove2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
         Map<String, List<String>> testmap = new HashMap();
@@ -300,6 +301,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void add2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
         Map<String, List<String>> testmap = new HashMap();
@@ -522,6 +524,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void replace2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
         String elementName = null;
@@ -800,6 +803,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void remove_between2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
 //        StreamSource source = new StreamSource("contexts.xml");
