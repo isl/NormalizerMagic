@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gr.forth.isl.normalizationmagic;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +20,13 @@ import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-/**
+/** This class contains the basic functions that are applied.
  *
  * @author minadakn
+ * @author Yannis Marketakis (marketak 'at' ics 'dot' forth 'dot' gr)
  */
 public class Actions {
+    public static final String DISSECTION_CHILD_ELEMENT_SUFFIX="_child";
 
     public static void remove(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
@@ -911,7 +904,7 @@ public class Actions {
         }
 
     }
-
+    
     public static void dissect(String elementName, String delimeter, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
@@ -929,11 +922,11 @@ public class Actions {
                         String[] texts = ((Characters) ef2).getData().split(delimeter);
                         out.add(e);
                         for (String text : texts) {
-                            ef2 = ef.createStartElement("", "", elementName);
+                            ef2 = ef.createStartElement("", "", elementName+DISSECTION_CHILD_ELEMENT_SUFFIX);
                             out.add(ef2);
                             ef2 = ef.createCharacters(text.trim());
                             out.add(ef2);
-                            ef2 = ef.createEndElement("", "", elementName);
+                            ef2 = ef.createEndElement("", "", elementName+DISSECTION_CHILD_ELEMENT_SUFFIX);
                             out.add(ef2);
                         } 
                     }
@@ -949,10 +942,9 @@ public class Actions {
     }
     
     //added my MaTh
-    
+    @Deprecated
     public static void dissect2(String elementName, String delimeter, List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
-//        
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
             XMLEventWriter out = ofactory.createXMLEventWriter(result);
