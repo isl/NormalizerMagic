@@ -75,7 +75,7 @@ public class StAXModifyDemo {
             }else if(line.toLowerCase().startsWith("dissect") || line.toLowerCase().startsWith("split")){
                 dissectInputs.add(line);
             }else{
-                //to log warning here
+                System.out.println("Skipping rule "+line);
             }
             line = reader.readLine();
         }
