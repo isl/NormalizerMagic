@@ -71,9 +71,9 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
+                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart())) {
 
-                    String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
+                    String tocheck = e.asStartElement().getName().getLocalPart();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
 
@@ -105,6 +105,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void remove2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
         Map<String, List<String>> testmap = new HashMap();
@@ -265,9 +266,9 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
+                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart())) {
 
-                    String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
+                    String tocheck = e.asStartElement().getName().getLocalPart();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
 
@@ -300,6 +301,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void add2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
         Map<String, List<String>> testmap = new HashMap();
@@ -464,20 +466,7 @@ public class Actions {
 
             }
             testmap.put(elementName, values);
-//            if(manme.contains("Remove") || manme.contains("Delete") )
-//           {
-//               String[] allofme = manme.split(" ");
-//               
-//               //     System.out.println(allofme[counter]);
-//           }
         }
-//
-//        String elementName2 = "t2";
-//        String elementValue2 = "()";
-//
-//        testmap.put(elementName1, elementValue1);
-//        testmap.put(elementName2, elementValue2);
-       
 
         try {
             XMLEventReader in = ifactory.createXMLEventReader(source);
@@ -489,9 +478,9 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
+                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart())) {
 
-                    String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
+                    String tocheck = e.asStartElement().getName().getLocalPart();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
 
@@ -522,6 +511,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void replace2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
         String elementName = null;
@@ -764,9 +754,9 @@ public class Actions {
 
                 XMLEvent e = in.nextEvent();
 
-                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart().toLowerCase())) {
+                if (e.isStartElement() && testmap.containsKey(((StartElement) e).getName().getLocalPart())) {
 
-                    String tocheck = e.asStartElement().getName().getLocalPart().toLowerCase();
+                    String tocheck = e.asStartElement().getName().getLocalPart();
 
                     XMLEvent ef2 = (XMLEvent) in.next();
 
@@ -800,6 +790,7 @@ public class Actions {
 
     }
 
+    @Deprecated
     public static void remove_between2(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
 
 //        StreamSource source = new StreamSource("contexts.xml");
@@ -912,7 +903,7 @@ public class Actions {
             XMLEventFactory ef = XMLEventFactory.newInstance();
             while (in.hasNext()) {
                 XMLEvent e = in.nextEvent();
-                if (e.isStartElement() && (((StartElement) e).getName().getLocalPart().toLowerCase().equals(elementName))) {
+                if (e.isStartElement() && (((StartElement) e).getName().getLocalPart().equals(elementName))) {
                     XMLEvent ef2 = (XMLEvent) in.next();
                     if(ef2.isEndElement()){
                         out.add(e);
