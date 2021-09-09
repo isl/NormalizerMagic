@@ -17,6 +17,7 @@ import javax.xml.stream.events.*;
  *
  * @author minadakn
  */
+@Deprecated
 public class Main {
   
     private static boolean bcompany,btitle,bname,bemail,bphone; 
