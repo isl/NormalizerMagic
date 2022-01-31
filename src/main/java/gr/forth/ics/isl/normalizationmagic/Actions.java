@@ -36,16 +36,16 @@ public class Actions {
         String elementName = null;
         while (i.hasNext()) {
             String manme = i.next().toString();
-            if ((manme.toLowerCase().contains("remove") || manme.toLowerCase().contains("delete")) && !(manme.toLowerCase().contains("between"))) {
+            if ((manme.toLowerCase().contains(Resources.REMOVE) || manme.toLowerCase().contains(Resources.DELETE)) && !(manme.toLowerCase().contains(Resources.BETWEEN))) {
                 String[] allofme = manme.split(" ");
                 int counter = 0;
                 for (String allofmeCont : allofme) {
                     counter++;
-                    if (allofmeCont.toLowerCase().equals("remove") || allofmeCont.toLowerCase().equals("delete")) {
+                    if (allofmeCont.toLowerCase().equals(Resources.REMOVE) || allofmeCont.toLowerCase().equals(Resources.DELETE)) {
                         String elementValue = allofme[counter];
                         values.add(elementValue);
                     }
-                    if (allofmeCont.toLowerCase().equals("from")) {
+                    if (allofmeCont.toLowerCase().equals(Resources.FROM)) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
                     }
                 }
@@ -141,20 +141,20 @@ public class Actions {
         Iterator i = inputs.iterator();
         while (i.hasNext()) {
             String manme = i.next().toString();
-            if (manme.toLowerCase().contains("replace") || manme.contains("change")) {
+            if (manme.toLowerCase().contains(Resources.REPLACE) || manme.contains(Resources.CHANGE)) {
                 String[] allofme = manme.split(" ");
                 int counter = 0;
                 String elementValue1 = null;
                 String elementValue2 = null;
                 for (String allofmeCont : allofme) {
                     counter++;
-                    if (allofmeCont.toLowerCase().equals("replace") || allofmeCont.equals("change")) {
+                    if (allofmeCont.toLowerCase().equals(Resources.REPLACE) || allofmeCont.equals(Resources.CHANGE)) {
                         elementValue1 = allofme[counter];
                     }
-                    if (allofmeCont.equals("with")) {
+                    if (allofmeCont.equals(Resources.WITH)) {
                         elementValue2 = allofme[counter];
                     }
-                    if (allofmeCont.equals("from")) {
+                    if (allofmeCont.equals(Resources.FROM)) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
                     }
                 }
@@ -200,12 +200,12 @@ public class Actions {
         Iterator i = inputs.iterator();
         while (i.hasNext()) {
             String manme = i.next().toString();
-            if (manme.toLowerCase().contains("remove") && manme.toLowerCase().contains("between")) {
+            if (manme.toLowerCase().contains(Resources.REMOVE) && manme.toLowerCase().contains(Resources.BETWEEN)) {
                 String[] allofme = manme.split(" ");
                 int counter = 0;
                 for (String allofmeCont : allofme) {
                     counter++;
-                    if (allofmeCont.equals("from")) {
+                    if (allofmeCont.equals(Resources.FROM)) {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
                         s.add(elementName);
                     }
@@ -219,18 +219,18 @@ public class Actions {
             ArrayList<Pair> values = new ArrayList();
             while (i2.hasNext()) {
                 String manme = i2.next().toString();
-                if (manme.toLowerCase().contains("remove") && manme.contains("between") && manme.contains(edw)) {
+                if (manme.toLowerCase().contains(Resources.REMOVE) && manme.contains(Resources.BETWEEN) && manme.contains(edw)) {
                     String elementValue1 = null;
                     String elementValue2 = null;
                     String[] allofme = manme.split(" ");
                     int counter = 0;
                     for (String allofmeCont : allofme) {
                         counter++;
-                        if (allofmeCont.equals("between")) {
+                        if (allofmeCont.equals(Resources.BETWEEN)) {
                             elementValue1 = allofme[counter];
                             elementValue2 = allofme[counter + 1];
                         }
-                        if (allofmeCont.equals("from")) {
+                        if (allofmeCont.equals(Resources.FROM)) {
                             elementName = allofme[counter].replace("<", "").replace(">", "");
                         }
                     }

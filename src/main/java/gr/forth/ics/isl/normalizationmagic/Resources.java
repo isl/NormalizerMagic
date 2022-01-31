@@ -25,10 +25,12 @@ public class Resources {
     /* core labels and filenames */
     public static final String INTERMEDIATE_FILE_NAME="input_intermediate.xml";
     public static final String BETWEEN="between";
+    public static final String CHANGE="change";
     public static final String DELETE="delete";
     public static final String DISSECT="dissect";
+    public static final String FROM="from";
     public static final String REMOVE="remove";
     public static final String REPLACE="replace";
     public static final String SPLIT="split";
-    
+    public static final String WITH="with";    
 }

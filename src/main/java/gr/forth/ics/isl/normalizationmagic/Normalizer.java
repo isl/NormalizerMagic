@@ -74,7 +74,7 @@ public class Normalizer {
 
             String line = reader.readLine();
             while (line != null) {
-                if(line.toLowerCase().startsWith(Resources.REPLACE)){
+                if(line.toLowerCase().startsWith(Resources.REPLACE) || line.toLowerCase().startsWith(Resources.CHANGE)){
                     replaceInputs.add(line);
                 }else if(line.toLowerCase().startsWith(Resources.REMOVE) || line.toLowerCase().startsWith(Resources.DELETE)){
                     if(line.toLowerCase().contains(" "+Resources.BETWEEN+" ")){
