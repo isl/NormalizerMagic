@@ -1,12 +1,10 @@
 package gr.forth.ics.isl.normalizationmagic;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -50,11 +48,11 @@ public class Normalizer {
         this.inputFile=new File(inputFilePath);
         this.outputFile=new File(outputFilePath);
         this.rulesFile=new File(rulesFilePath);
-        if(!Files.exists(Paths.get(inputFile.getAbsolutePath())) || Files.isRegularFile(Paths.get(inputFile.getAbsolutePath()))){
+        if(!Files.exists(Paths.get(inputFile.getAbsolutePath())) || !Files.isRegularFile(Paths.get(inputFile.getAbsolutePath()))){
             log.error("Cannot find the XML input file with path: "+inputFilePath);
         }
-        if(!Files.exists(Paths.get(rulesFile.getAbsolutePath())) || Files.isRegularFile(Paths.get(rulesFile.getAbsolutePath()))){
-            log.error("Cannot find the TXT rules file with path: "+inputFilePath);
+        if(!Files.exists(Paths.get(rulesFile.getAbsolutePath())) || !Files.isRegularFile(Paths.get(rulesFile.getAbsolutePath()))){
+            log.error("Cannot find the TXT rules file with path: "+rulesFilePath);
         }
     }
 
@@ -87,15 +85,19 @@ public class Normalizer {
 
                 }else if(line.toLowerCase().startsWith("dissect") || line.toLowerCase().startsWith("split")){
                     dissectInputs.add(line);
+                }else if(line.trim().isEmpty()){
+                    log.debug("skipping empty line");
+                }else if(line.trim().startsWith("#")){
+                    log.debug("skipping commented rule "+line);
                 }else{
-                    System.out.println("Skipping rule "+line);
+                    log.warn("skipping unknown rule");
                 }
                 line = reader.readLine();
             }
             reader.close();
             int i=0;
             for(String replaceInput : replaceInputs){
-                System.out.println("Applying REPLACE rule : "+replaceInput);
+                log.info("Applying REPLACE rule : "+replaceInput);
                 result=new StreamResult(new OutputStreamWriter(new FileOutputStream(this.outputFile, false),"UTF-8"));
                 if(intermediateInput==null){
                     Actions.replace(Arrays.asList(replaceInput), source, result, ifactory, ofactory);
@@ -109,7 +111,7 @@ public class Normalizer {
             }
 
             for(String removeInput : removeBetweenInputs){
-                System.out.println("Applying REMOVE BETWEEN rule : "+removeInput);
+                log.info("Applying REMOVE BETWEEN rule : "+removeInput);
                 result=new StreamResult(new OutputStreamWriter(new FileOutputStream(this.outputFile, false),"UTF-8"));
                 if(intermediateInput==null){
                     Actions.remove_between(Arrays.asList(removeInput), source, result, ifactory, ofactory);
@@ -123,7 +125,7 @@ public class Normalizer {
             }
 
             for(String removeInput : removeInputs){
-                System.out.println("Applying REMOVE rule : "+removeInput);
+                log.info("Applying REMOVE rule : "+removeInput);
                 result=new StreamResult(new OutputStreamWriter(new FileOutputStream(this.outputFile, false),"UTF-8"));
                 if(intermediateInput==null){
                     Actions.remove(Arrays.asList(removeInput), source, result, ifactory, ofactory);
@@ -137,7 +139,7 @@ public class Normalizer {
             }
 
             for(String dissectLine : dissectInputs){
-                System.out.println("Applying DISSECT rule : "+dissectLine);
+                log.info("Applying DISSECT rule : "+dissectLine);
                 result=new StreamResult(new OutputStreamWriter(new FileOutputStream(this.outputFile, false),"UTF-8"));
                 Pair<String,String> dissectPair=Utils.getDissectionInfo(dissectLine.trim());
                 if(intermediateInput==null){
