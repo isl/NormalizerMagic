@@ -1,0 +1,8 @@
+Replace @ with a from Name
+
+dissect # from Education
+#dissect , from Education_child
+
+remove all between ( ) from Country
+
+remove - from Address

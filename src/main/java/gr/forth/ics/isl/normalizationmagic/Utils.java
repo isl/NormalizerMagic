@@ -1,4 +1,4 @@
-package gr.forth.isl.normalizationmagic;
+package gr.forth.ics.isl.normalizationmagic;
 
 import javafx.util.Pair;
 
