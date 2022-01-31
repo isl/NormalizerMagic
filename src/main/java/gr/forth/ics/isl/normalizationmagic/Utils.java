@@ -1,6 +1,6 @@
 package gr.forth.ics.isl.normalizationmagic;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * @author Yannis Marketakis (marketak 'at' ics 'dot' forth 'dot' gr)
@@ -12,7 +12,7 @@ public class Utils {
                                          .toLowerCase().replace("dissect", "")
                                                        .replace("split", "")
                                                        .replace("from", "").trim();
-        Pair<String,String> dissectionPair=new Pair(elementName, dissectText);
+        Pair<String,String> dissectionPair=Pair.of(elementName, dissectText);
         return dissectionPair;
     }
 }

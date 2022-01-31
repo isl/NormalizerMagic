@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import javafx.util.Pair;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
@@ -19,6 +18,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import org.apache.commons.lang3.tuple.Pair;
 
 /** This class contains the basic functions that are applied.
  *
@@ -136,8 +136,8 @@ public class Actions {
 
     public static void replace(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
         String elementName = null;
-        Map<String, List<Pair>> testmap = new HashMap();
-        ArrayList<Pair> values = new ArrayList();
+        Map<String, List<Pair<String,String>>> testmap = new HashMap();
+        ArrayList<Pair<String,String>> values = new ArrayList();
         Iterator i = inputs.iterator();
         while (i.hasNext()) {
             String manme = i.next().toString();
@@ -158,7 +158,7 @@ public class Actions {
                         elementName = allofme[counter].replace("<", "").replace(">", "");
                     }
                 }
-                values.add(new Pair(elementValue1, elementValue2));
+                values.add(Pair.of(elementValue1, elementValue2));
             }
             testmap.put(elementName, values);
         }
@@ -234,7 +234,7 @@ public class Actions {
                             elementName = allofme[counter].replace("<", "").replace(">", "");
                         }
                     }
-                    values.add(new Pair(elementValue1, elementValue2));
+                    values.add(Pair.of(elementValue1, elementValue2));
                 }
             }
             testmap.put(elementName, values);
