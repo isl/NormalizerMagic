@@ -45,7 +45,7 @@ public class Normalizer {
     private final File outputFile;
     private final File rulesFile;
     
-    public Normalizer(String inputFilePath, String outputFilePath, String rulesFilePath){
+    public Normalizer(String inputFilePath, String rulesFilePath, String outputFilePath){
         log.debug("Initializing Normalizer with input file path: "+inputFilePath+" output file path: "+outputFilePath+" and rules file path: "+rulesFilePath);
         this.inputFile=new File(inputFilePath);
         this.outputFile=new File(outputFilePath);
