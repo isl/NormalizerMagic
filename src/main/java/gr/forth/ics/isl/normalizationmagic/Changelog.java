@@ -1,4 +1,4 @@
-package gr.forth.isl.normalizationmagic;
+package gr.forth.ics.isl.normalizationmagic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
