@@ -104,8 +104,8 @@ public class Normalizer {
                 }
                 ifactory= XMLInputFactory.newFactory();
                 ofactory = XMLOutputFactory.newFactory();
-                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
-                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));           
+                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get(Resources.INTERMEDIATE_FILE_NAME), StandardCopyOption.REPLACE_EXISTING);
+                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream(Resources.INTERMEDIATE_FILE_NAME),"UTF-8"));           
             }
 
             for(String removeInput : removeBetweenInputs){
@@ -118,8 +118,8 @@ public class Normalizer {
                 }
                 ifactory= XMLInputFactory.newFactory();
                 ofactory = XMLOutputFactory.newFactory();
-                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
-                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));
+                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get(Resources.INTERMEDIATE_FILE_NAME), StandardCopyOption.REPLACE_EXISTING);
+                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream(Resources.INTERMEDIATE_FILE_NAME),"UTF-8"));
             }
 
             for(String removeInput : removeInputs){
@@ -132,8 +132,8 @@ public class Normalizer {
                 }
                 ifactory= XMLInputFactory.newFactory();
                 ofactory = XMLOutputFactory.newFactory();
-                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
-                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));
+                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get(Resources.INTERMEDIATE_FILE_NAME), StandardCopyOption.REPLACE_EXISTING);
+                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream(Resources.INTERMEDIATE_FILE_NAME),"UTF-8"));
             }
 
             for(String dissectLine : dissectInputs){
@@ -147,15 +147,15 @@ public class Normalizer {
                 }
                 ifactory= XMLInputFactory.newFactory();
                 ofactory = XMLOutputFactory.newFactory();
-                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get("input_intermediate.xml"), StandardCopyOption.REPLACE_EXISTING);
-                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream("input_intermediate.xml"),"UTF-8"));   
+                Files.copy(Paths.get(this.outputFile.getAbsolutePath()), Paths.get(Resources.INTERMEDIATE_FILE_NAME), StandardCopyOption.REPLACE_EXISTING);
+                intermediateInput=new StreamSource(new InputStreamReader(new FileInputStream(Resources.INTERMEDIATE_FILE_NAME),"UTF-8"));   
             }
             result.getWriter().flush();
             result.getWriter().close();
             intermediateInput.getReader().close();
             
             beautifyOutputResult(this.outputFile);
-            Files.delete(Paths.get("input_intermediate.xml"));
+            Files.delete(Paths.get(Resources.INTERMEDIATE_FILE_NAME));
         }catch(FactoryConfigurationError ex){
             log.error("An error occured while initiating the normalizer",ex);
         }catch(IOException ex){
