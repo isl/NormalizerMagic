@@ -74,16 +74,16 @@ public class Normalizer {
 
             String line = reader.readLine();
             while (line != null) {
-                if(line.toLowerCase().startsWith("replace")){
+                if(line.toLowerCase().startsWith(Resources.REPLACE)){
                     replaceInputs.add(line);
-                }else if(line.toLowerCase().startsWith("remove") || line.toLowerCase().startsWith("delete")){
-                    if(line.toLowerCase().contains(" between ")){
+                }else if(line.toLowerCase().startsWith(Resources.REMOVE) || line.toLowerCase().startsWith(Resources.DELETE)){
+                    if(line.toLowerCase().contains(" "+Resources.BETWEEN+" ")){
                         removeBetweenInputs.add(line);
                     }else{
                         removeInputs.add(line);
                     }
 
-                }else if(line.toLowerCase().startsWith("dissect") || line.toLowerCase().startsWith("split")){
+                }else if(line.toLowerCase().startsWith(Resources.DISSECT) || line.toLowerCase().startsWith(Resources.SPLIT)){
                     dissectInputs.add(line);
                 }else if(line.trim().isEmpty()){
                     log.debug("skipping empty line");
