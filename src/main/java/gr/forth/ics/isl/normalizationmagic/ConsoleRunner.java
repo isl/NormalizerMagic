@@ -8,6 +8,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -38,6 +39,8 @@ public class ConsoleRunner {
                 System.exit(0);
             }
             CommandLine cli = PARSER.parse(options, arguments);
+        }catch(MissingOptionException ex){
+            verboseError(ex.getMessage());
         }catch(ParseException ex){
             log.error("Unable to parse parameters."+ex);
         }catch(IOException ex){
@@ -61,7 +64,7 @@ public class ConsoleRunner {
                 .addOption(historyOption);
     }
     
-    private static void error(String message) {
+    private static void verboseError(String message) {
         HELP.setDescPadding(5);
         HELP.setLeftPadding(5);
         HELP.printHelp(
