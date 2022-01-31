@@ -87,8 +87,6 @@ public class ConsoleRunner {
         try{
             Properties propertiesFile=new Properties();
             propertiesFile.load(ConsoleRunner.class.getClassLoader().getResourceAsStream(Resources.MAGIC_NORMALIZER_PROPERTIES_FILE));
-//            String artifactId=propertiesFile.getProperty(Resources.MAGIC_NORMALIZER_NAME_PROPERTY);
-//            String version=propertiesFile.getProperty(Resources.MAGIC_NORMALIZER_VERSION_PROPERTY);
             MagicNormalizerVersion=propertiesFile.getProperty(Resources.MAGIC_NORMALIZER_NAME_PROPERTY)+" Version: "+propertiesFile.getProperty(Resources.MAGIC_NORMALIZER_VERSION_PROPERTY);
         }catch(IOException ex){
             log.error("An error occured while retrieving project-related information",ex);
