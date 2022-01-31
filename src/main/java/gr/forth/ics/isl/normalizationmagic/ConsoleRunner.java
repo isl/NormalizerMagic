@@ -39,6 +39,7 @@ public class ConsoleRunner {
                 System.exit(0);
             }
             CommandLine cli = PARSER.parse(options, arguments);
+            
         }catch(MissingOptionException ex){
             verboseError(ex.getMessage());
         }catch(ParseException ex){
