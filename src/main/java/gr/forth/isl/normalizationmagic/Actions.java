@@ -34,7 +34,6 @@ public class Actions {
         ArrayList<String> values = new ArrayList();
         Iterator i = inputs.iterator();
         String elementName = null;
-        String elementValue = null;
         while (i.hasNext()) {
             String manme = i.next().toString();
             if ((manme.toLowerCase().contains("remove") || manme.toLowerCase().contains("delete")) && !(manme.toLowerCase().contains("between"))) {
@@ -43,7 +42,7 @@ public class Actions {
                 for (String allofmeCont : allofme) {
                     counter++;
                     if (allofmeCont.toLowerCase().equals("remove") || allofmeCont.toLowerCase().equals("delete")) {
-                        elementValue = allofme[counter];
+                        String elementValue = allofme[counter];
                         values.add(elementValue);
                     }
                     if (allofmeCont.toLowerCase().equals("from")) {
@@ -87,7 +86,6 @@ public class Actions {
         ArrayList<String> values = new ArrayList();
         Iterator i = inputs.iterator();
         String elementName = null;
-        String elementValue = null;
         while (i.hasNext()) {
             String manme = i.next().toString();
             if ((manme.contains("ADD"))) {
@@ -96,7 +94,7 @@ public class Actions {
                 for (String allofmeCont : allofme) {
                     counter++;
                     if (allofmeCont.equals("ADD")) {
-                        elementValue = allofme[counter];
+                        String elementValue = allofme[counter];
                         values.add(elementValue);
                     }
                     if (allofmeCont.toLowerCase().equals("from")) {
@@ -138,7 +136,6 @@ public class Actions {
 
     public static void replace(List inputs, StreamSource source, StreamResult result, XMLInputFactory ifactory, XMLOutputFactory ofactory) {
         String elementName = null;
-        Pair<String, String> elementValue = new Pair(null, null);
         Map<String, List<Pair>> testmap = new HashMap();
         ArrayList<Pair> values = new ArrayList();
         Iterator i = inputs.iterator();
