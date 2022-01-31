@@ -39,7 +39,10 @@ public class ConsoleRunner {
                 System.exit(0);
             }
             CommandLine cli = PARSER.parse(options, arguments);
-            
+            Normalizer normalizer=new Normalizer(cli.getOptionValue(Resources.INPUT_FILE_CLI),
+                                                 cli.getOptionValue(Resources.RULES_FILE_CLI),
+                                                 cli.getOptionValue(Resources.OUTPUT_FILE_CLI));
+            normalizer.normalize();
         }catch(MissingOptionException ex){
             verboseError(ex.getMessage());
         }catch(ParseException ex){
@@ -55,6 +58,7 @@ public class ConsoleRunner {
         Option rulesFileOption = new Option(Resources.RULES_FILE_SHORT_CLI, Resources.RULES_FILE_CLI, true, "The TXT file with the magic normalizer rules");
         rulesFileOption.setRequired(true);
         Option outputFileOption = new Option(Resources.OUTPUT_FILE_SHORT_CLI, Resources.OUTPUT_FILE_CLI, true, "The normalized XML file");
+        outputFileOption.setRequired(true);
         Option versionOption = new Option(Resources.VERSION_SHORT_CLI, Resources.VERSION_CLI, false, "Reports the MagicNormalizer version");
         Option historyOption = new Option(Resources.HISTORY_SHORT_CLI, Resources.HISTORY_CLI, false, "Reports the full version history of MagicNormalizer");
 
