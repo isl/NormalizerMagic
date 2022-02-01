@@ -55,9 +55,6 @@ dissect some_text from some_element
 ```
 The preserved words are **dissect** (or split) and **from**. **some_text** is the string to be used as a separator of the text node of the  element with name **some_element**. The result is that it will create chlidren elements with name **some_element_child** each one having the dissected contents.
 
-### Add
-N/A
-
 ## How to run it
 
 The tool can be either be used as a JAVA API, or as a command-line executable. 
