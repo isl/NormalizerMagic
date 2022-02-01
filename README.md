@@ -61,7 +61,7 @@ The tool can be either be used as a JAVA API, or as a command-line executable.
 As regards the latter, you are requested to download the latest release from https://github.com/isl/NormalizerMagic/releases 
 and execute it using JAVA runtime. 
 ```bash
-java -jar MagicNormalizer-exejar
+java -jar MagicNormalizer-exejar.jar
 ```
 
 The above execution reveals the parameters that are accepted from the tool. They are shown in the following table. 
@@ -76,5 +76,5 @@ The above execution reveals the parameters that are accepted from the tool. They
 
 Assuming that the file to be normalized is input.xml, the rules are defined in a file with name rules.txt and that the normalized resources should be exported in a file with name input_normalized.xml, the tool can be executed as follows 
 ```bash
-java -jar MagicNormalizer-exejar -i input.xml -r rules.txt -o input_normalized.xml
+java -jar MagicNormalizer-exejar.jar -i input.xml -r rules.txt -o input_normalized.xml
 ```
