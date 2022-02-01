@@ -21,6 +21,7 @@ public class Resources {
     public static final String MAGIC_NORMALIZER_PROPERTIES_FILE="magicnormalizer.properties";
     public static final String MAGIC_NORMALIZER_NAME_PROPERTY="MAGIC_NORMALIZER_ARTIFACT_ID";
     public static final String MAGIC_NORMALIZER_VERSION_PROPERTY="MAGIC_NORMALIZER_VERSION";
+    public static final String FORMATTER_XSLT="formatter.xslt";
     
     /* core labels and filenames */
     public static final String INTERMEDIATE_FILE_NAME="input_intermediate.xml";
