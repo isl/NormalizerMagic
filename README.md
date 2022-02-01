@@ -58,7 +58,7 @@ The preserved words are **dissect** (or split) and **from**. **some_text** is th
 ## How to run it
 
 The tool can be either be used as a JAVA API, or as a command-line executable. 
-As regards the latter, you are requested to download the latest release from X 
+As regards the latter, you are requested to download the latest release from https://github.com/isl/NormalizerMagic/releases 
 and execute it using JAVA runtime. 
 ```bash
 java -jar MagicNormalizer-exejar
