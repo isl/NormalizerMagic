@@ -170,10 +170,9 @@ public class Normalizer {
     private void beautifyOutputResult(File file) throws ParserConfigurationException, SAXException, FileNotFoundException, IOException, TransformerConfigurationException, TransformerException{
         Document doc=DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(file), "UTF-8");
         
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        Transformer transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(this.getClass().getClassLoader().getResourceAsStream(Resources.FORMATTER_XSLT)));
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-        
         StreamResult finalResult = new StreamResult(file);
         DOMSource source = new DOMSource(doc);
         transformer.transform(source, finalResult);
